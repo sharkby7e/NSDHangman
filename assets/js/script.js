@@ -19,13 +19,16 @@ var targetWord = ""
 // add eventListener to start button click===true 
 start.addEventListener("click", function() {
   //      hide it z index 0
-  displayWord = "";
   start.setAttribute("style","display:none")
-  // call generate word
-  word.textContent = displayWord
-  generateWord()
   countdown()
+  // call generate word
+  generateWord()
+  changeDisplay()
 })
+
+function changeDisplay(){
+  word.textContent = displayWord
+}
 //      word displayed in dashes
 //      add start/replay button
 
@@ -39,25 +42,28 @@ function generateWord() {
     displayWord += " _ "
   }
 }
- 
+// add event listner for key press 
 document.addEventListener("keydown", function(event) {
   var keyPress = event.key
   console.log(keyPress)
-  console.log(targetWord)
-  var newWord = ""
-  for (let i = 0; i < targetWord.length; i++) {
-    if (targetWord[i] === keyPress) {
-      console.log("match found")
-      newWord+= keyPress
-    }else{
-      newWord+=' _ '
-    }   
-  }
-      word.textContent = newWord
+  wordReplacer(keyPress)
 })
 
-// add event listner for key press 
-//      if key press by user check matches any letter in the word then 
+// if key press by user check matches any letter in the word then 
+function wordReplacer(letter) {
+ displayWord = ""
+  for (let i = 0; i < targetWord.length; i++) {
+    if (targetWord[i] === letter) {
+      console.log("match found")
+      displayWord+=( " " +letter + " ")
+    }else{
+      displayWord+=( " _ " )  
+    } 
+    console.log(displayWord)
+    changeDisplay()
+  }
+  
+}
 //          change that word from blank to actual letter
 //      else return()
 
