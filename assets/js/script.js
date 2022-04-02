@@ -8,23 +8,31 @@ var reset = document.querySelector('.reset')
 var start = document.querySelector('.start')
 var wins = document.querySelector(".wins")
 var losses = document.querySelector(".losses")
+
 var library = ["query", "console", "farley", "sharkbyte", "mississippi", "nvdia"]
-
-
+var displayWord = ""
 
 // add eventListener to start button click===true 
+start.addEventListener("click", function(){
 //      hide it z index 0
-//      call generate word
+  displayWord = ""; 
+     // call generate word
+  generateWord()
+  word.textContent = displayWord
+
+})
 //      word displayed in dashes
 //      add start/replay button
 
-
 // generate word function 
-//  targetWord= picks randomly from library
-//   displayWord=""
-// for loop that adds to diplayWord underscores as long as targetWord
-//        displayWord+="_"
-//  return displayWord
+function generateWord() {
+  //  targetWord= picks randomly from library
+  var targetWord = library[Math.floor(Math.random()*library.length)]
+  // for loop that adds to diplayWord underscores as long as targetWord
+  for (let i = 0; i < targetWord.length; i++) {
+    displayWord += " _ "
+  }
+}
 
 
 // add event listner for key press 
