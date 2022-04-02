@@ -1,4 +1,4 @@
-console.log("sup bro")
+console.log("WOW UR A CHEATER")
 
 var word = document.querySelector(".word")
 var result = document.querySelector('.result')
