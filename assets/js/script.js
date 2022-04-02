@@ -92,7 +92,7 @@ function displayWordReplacer(letter) {
 }
 
 function countdown() {
-  timeLeft=20
+  timeLeft=15
   time.textContent = timeLeft
   var timeInterval = setInterval(function() {
     if (displayWord === targetWord){
@@ -119,7 +119,7 @@ function winOrLose() {
     time.textContent = "☠";
     losses ++
     localStorage.setItem("losses",losses)
-    lossDisp.textContent = wins
+    lossDisp.textContent = losses
   }
 }
 
