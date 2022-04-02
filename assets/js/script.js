@@ -73,7 +73,6 @@ function generateBlankWord() { //  targetWord= picks randomly from library
 // add event listner for key press 
 document.addEventListener("keydown", function(event) {
   var keyPress = event.key
-  console.log(keyPress)
   displayWordReplacer(keyPress)
 })
 
@@ -93,7 +92,7 @@ function displayWordReplacer(letter) {
 }
 
 function countdown() {
-  timeLeft=30
+  timeLeft=20
   time.textContent = timeLeft
   var timeInterval = setInterval(function() {
     if (displayWord === targetWord){
