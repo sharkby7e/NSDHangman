@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>NSD Hangman</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
-
 <body>
-    <h1>Not So Deadly Hangman</h1>
-    <!-- container for game
-            we need a container for a word(hidden)
+  <h1>Not So Deadly Hangman</h1>
+  <!-- container for game we need a container for a word(hidden) -->
+  <main class="game">
+
+    <div class="display">
+      <h2 class="word">TEST CONTENT</h2>
+      <h2 class= "result"></h2>
+    </div>
+
+    <!-- countdown clock
+      timer;
+      replay button;
     -->
+    <div class="clock">
+      <h2 class="timer">10</h2>
+      <button class="reset"></button>
+    </div>
+  </main>
 
-    <main class="game">
-        <div class="display">
+  <section class="scoreboard">
+    <h2>TEST CONTENT</h2>
 
-
-        </div>
-        <div class="clock">
-
-        </div>
-        <!-- countdown clock
-            timer;
-            replay button;
-            you win===winner
-            you lose===loser
-      -->
-    </main>
-    <section class="scoreboard">
-
-    </section>
-    <!-- container for score
-            wins;win count
-            loss;losscount 
-    -->
+  </section>
+  <!-- container for score
+      you win===winner
+      wins;win count
+      loss;losscount 
+      you lose===loser
+  -->
 
 
-    <h1>N</h1>
-    <script src="assets/js/script.js"></script>
+  <h1>N</h1>
+  <script src="assets/js/script.js"></script>
 </body>
 
 </html>
