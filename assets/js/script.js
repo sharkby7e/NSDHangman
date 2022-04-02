@@ -12,45 +12,48 @@ var losses = document.querySelector(".losses")
 var library = ["query", "console", "farley", "sharkbyte", "mississippi", "nvdia"]
 var displayWord = ""
 
-var timeLeft = 30;
+var timeLeft = 3;
 
 var targetWord = ""
 
 // add eventListener to start button click===true 
 start.addEventListener("click", function() {
-        //      hide it z index 0
-        displayWord = "";
-        // call generate word
-        generateWord()
-        countdown()
-        word.textContent = displayWord
-
-
-    })
-    //      word displayed in dashes
-    //      add start/replay button
+  //      hide it z index 0
+  displayWord = "";
+  start.setAttribute("style","display:none")
+  // call generate word
+  word.textContent = displayWord
+  generateWord()
+  countdown()
+})
+//      word displayed in dashes
+//      add start/replay button
 
 // generate word function 
 function generateWord() {
-    //  targetWord= picks randomly from library
-    targetWord = library[Math.floor(Math.random() * library.length)]
-        // for loop that adds to diplayWord underscores as long as targetWord
-    for (let i = 0; i < targetWord.length; i++) {
-        displayWord += " _ "
-    }
+  //  targetWord= picks randomly from library
+  targetWord = library[Math.floor(Math.random() * library.length)]
+  console.log(targetWord)
+  // for loop that adds to diplayWord underscores as long as targetWord
+  for (let i = 0; i < targetWord.length; i++) {
+    displayWord += " _ "
+  }
 }
-
-
+ 
 document.addEventListener("keydown", function(event) {
-    var keyPress = event.key
-    for (i = 0; i < targetWord.length; i++) {
-        if (targetWord[i] === keyPress) {
-            displayWord[i] = keyPress
-        } else {
-            return
-        }
-    }
-
+  var keyPress = event.key
+  console.log(keyPress)
+  console.log(targetWord)
+  var newWord = ""
+  for (let i = 0; i < targetWord.length; i++) {
+    if (targetWord[i] === keyPress) {
+      console.log("match found")
+      newWord+= keyPress
+    }else{
+      newWord+=' _ '
+    }   
+  }
+      word.textContent = newWord
 })
 
 // add event listner for key press 
@@ -63,24 +66,27 @@ document.addEventListener("keydown", function(event) {
 //  localStorage.set item an arrary called score has two items in array first wins second losses
 
 function countdown() {
-    var timeInterval = setInterval(function() {
-        if (timeLeft > 1) {
-            time.textContent = timeLeft
-            timeLeft--;
-        } else {
-            clearInterval(timeInterval)
-            winOrLose()
-        }
-    }, 1000)
+  timeLeft=3
+  time.textContent = timeLeft
+  var timeInterval = setInterval(function() {
+    if (timeLeft > 0) {
+      timeLeft--;
+      time.textContent = timeLeft
+    } else {
+      reset.setAttribute("style","display:block")
+      clearInterval(timeInterval)
+      winOrLose()
+    }
+  }, 1000)
 }
 
 function winOrLose() {
-    if (targetWord === displayWord) {
-        time.textContent = "🤠";
-    } else {
-        time.textContent = "☠";
+  if (targetWord === displayWord) {
+    time.textContent = "🤠";
+  } else {
+    time.textContent = "☠";
 
-    }
+  }
 }
 
 // create timer countdown
