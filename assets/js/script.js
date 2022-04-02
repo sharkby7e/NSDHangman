@@ -6,8 +6,10 @@ var clock = document.querySelector('.clock')
 var time = document.querySelector('.timer')
 var reset = document.querySelector('.reset')
 var start = document.querySelector('.start')
-var wins = document.querySelector(".wins")
-var losses = document.querySelector(".losses")
+var winDisp = document.querySelector("#wins")
+var lossDisp = document.querySelector("#losses")
+var wins = localStorage.getItem("wins")
+var losses = localStorage.getItem("losses")
 
 var library = ["query", "console", "farley", "sharkbyte", "mississippi", "nvdia"]
 
@@ -15,10 +17,17 @@ var targetWord = ""
 var displayWord = ""
 var timeLeft = 3;
 
-
 // create local storage for wins/losses
 //  localStorage.set item an arrary called score has two items in array first wins second losses
+if(wins === null){
+  wins = 0
+}
+winDisp.textContent = wins
 
+if(losses === null){
+  losses = 0
+}
+lossDisp.textContent = losses
 
 // add eventListener to start button 
 start.addEventListener("click", function() {
@@ -84,9 +93,12 @@ function displayWordReplacer(letter) {
 }
 
 function countdown() {
-  timeLeft=3
+  timeLeft=30
   time.textContent = timeLeft
   var timeInterval = setInterval(function() {
+    if (displayWord === targetWord){
+      timeLeft = 0 
+    }
     if (timeLeft > 0) {
       timeLeft--;
       time.textContent = timeLeft
@@ -101,9 +113,14 @@ function countdown() {
 function winOrLose() {
   if (targetWord === displayWord) {
     time.textContent = "🤠";
+    wins++
+    localStorage.setItem("wins",wins)
+    winDisp.textContent = wins
   } else {
     time.textContent = "☠";
-
+    losses ++
+    localStorage.setItem("losses",losses)
+    lossDisp.textContent = wins
   }
 }
 
