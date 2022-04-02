@@ -10,66 +10,78 @@ var wins = document.querySelector(".wins")
 var losses = document.querySelector(".losses")
 
 var library = ["query", "console", "farley", "sharkbyte", "mississippi", "nvdia"]
-var displayWord = ""
-
-var timeLeft = 3;
 
 var targetWord = ""
-
-// add eventListener to start button click===true 
-start.addEventListener("click", function() {
-  //      hide it z index 0
-  start.setAttribute("style","display:none")
-  countdown()
-  // call generate word
-  generateWord()
-  changeDisplay()
-})
-
-function changeDisplay(){
-  word.textContent = displayWord
-}
-//      word displayed in dashes
-//      add start/replay button
-
-// generate word function 
-function generateWord() {
-  //  targetWord= picks randomly from library
-  targetWord = library[Math.floor(Math.random() * library.length)]
-  console.log(targetWord)
-  // for loop that adds to diplayWord underscores as long as targetWord
-  for (let i = 0; i < targetWord.length; i++) {
-    displayWord += " _ "
-  }
-}
-// add event listner for key press 
-document.addEventListener("keydown", function(event) {
-  var keyPress = event.key
-  console.log(keyPress)
-  wordReplacer(keyPress)
-})
-
-// if key press by user check matches any letter in the word then 
-function wordReplacer(letter) {
- displayWord = ""
-  for (let i = 0; i < targetWord.length; i++) {
-    if (targetWord[i] === letter) {
-      console.log("match found")
-      displayWord+=( " " +letter + " ")
-    }else{
-      displayWord+=( " _ " )  
-    } 
-    console.log(displayWord)
-    changeDisplay()
-  }
-  
-}
-//          change that word from blank to actual letter
-//      else return()
+var displayWord = ""
+var timeLeft = 3;
 
 
 // create local storage for wins/losses
 //  localStorage.set item an arrary called score has two items in array first wins second losses
+
+
+// add eventListener to start button 
+start.addEventListener("click", function() {
+  //hide it
+  start.setAttribute("style","display:none")
+  //begin game loop 
+  gameLoop()
+})
+
+reset.addEventListener("click", function(){ //add event listener to reset
+  reset.setAttribute("style","display:none") //hide it
+  gameLoop() //begin new game
+})
+
+function gameLoop(){
+  //start counting down
+  countdown()
+  // clear word 
+  displayWord= ""
+  // call generate word
+  generateBlankWord()
+}
+
+function writeDisplay(wrd){
+  var dsp =""
+  for (let i = 0; i < wrd.length; i++) {
+   dsp+= wrd[i] + " " 
+  }
+  word.textContent = dsp 
+}
+
+// generate word function 
+function generateBlankWord() { //  targetWord= picks randomly from library
+  targetWord = library[Math.floor(Math.random() * library.length)]
+  console.log(targetWord)
+  // for loop that adds to diplayWord underscores as long as targetWord
+  for (let i = 0; i < targetWord.length; i++) {
+    displayWord += "_"
+  }
+  writeDisplay(displayWord)
+}
+
+// add event listner for key press 
+document.addEventListener("keydown", function(event) {
+  var keyPress = event.key
+  console.log(keyPress)
+  displayWordReplacer(keyPress)
+})
+
+function displayWordReplacer(letter) {
+  var newDsp = ""//make new displayWord
+  for (let i = 0; i < displayWord.length; i++) { //for every letter in displayWord 
+    if(displayWord[i] !== '_'){ //if it is not blank
+      newDsp+=displayWord[i] //leave it to be what it is
+    }else if(targetWord[i] === letter){ //if it matches letter
+      newDsp+= letter //add the letter
+    }else {
+      newDsp+= '_' //otherwise add a blank
+    } 
+  }
+  displayWord= newDsp
+  writeDisplay(newDsp)
+}
 
 function countdown() {
   timeLeft=3
@@ -95,8 +107,3 @@ function winOrLose() {
   }
 }
 
-// create timer countdown
-//   result
-//     if display==target word 
-//            THEN DISPLAY YOU WIN
-//      else display you lose
