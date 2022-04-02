@@ -14,6 +14,8 @@ var displayWord = ""
 
 var timeLeft = 30;
 
+var targetWord = ""
+
 // add eventListener to start button click===true 
 start.addEventListener("click", function() {
         //      hide it z index 0
@@ -31,13 +33,25 @@ start.addEventListener("click", function() {
 // generate word function 
 function generateWord() {
     //  targetWord= picks randomly from library
-    var targetWord = library[Math.floor(Math.random() * library.length)]
+    targetWord = library[Math.floor(Math.random() * library.length)]
         // for loop that adds to diplayWord underscores as long as targetWord
     for (let i = 0; i < targetWord.length; i++) {
         displayWord += " _ "
     }
 }
 
+
+document.addEventListener("keydown", function(event) {
+    var keyPress = event.key
+    for (i = 0; i < targetWord.length; i++) {
+        if (targetWord[i] === keyPress) {
+            displayWord[i] = keyPress
+        } else {
+            return
+        }
+    }
+
+})
 
 // add event listner for key press 
 //      if key press by user check matches any letter in the word then 
@@ -62,7 +76,7 @@ function countdown() {
 
 function winOrLose() {
     if (targetWord === displayWord) {
-        time.textContent = "W";
+        time.textContent = "🤠";
     } else {
         time.textContent = "☠";
 
