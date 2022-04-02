@@ -43,6 +43,10 @@ body {
   font-size: 150px;
 }
 
+.start {
+  display: none;
+}
+
 .reset {
   display:none;
 }
@@ -52,7 +56,17 @@ body {
   width: 100%;
   background-color: blue;
 }
+.wins {
+  display : inline;
+  font-size: 50px;
+  font-size: 50px;
+} 
 
-h1 {
+.losses {
+  display : inline;
+  font-size: 50px;
+  font-size: 50px;
+} 
+ h1 {
   font-size: xx-large;
 }
